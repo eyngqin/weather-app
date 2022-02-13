@@ -1,5 +1,6 @@
 package com.example.weather.service.impl;
 
+import com.example.weather.entity.Forecast;
 import com.example.weather.entity.WeatherResponse;
 import com.example.weather.service.WeatherDataService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -33,6 +36,19 @@ public class WeatherDataServiceImpl implements WeatherDataService {
     public WeatherResponse getDataByCityName(String cityName) {
         String uri = WEATHER_API + "?city=" + cityName;
         return this.doGetWeatherData(uri);
+    }
+
+    @Override
+    public List<Forecast> getDataByCityNames(String cityNames) {
+        String[] citys = cityNames.split(",");
+        List<Forecast> list = new ArrayList<Forecast>();
+        for (String cityName: citys) {
+            Forecast f = this.doGetWeatherData(WEATHER_API + "?city=" + cityName)
+                    .getData().getForecast().get(0);
+            f.setCity(cityName);
+            list.add(f);
+        }
+        return list;
     }
 
     private WeatherResponse doGetWeatherData(String uri) {

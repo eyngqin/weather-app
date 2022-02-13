@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class Forecast implements Serializable {
+    private String city;
     private String date;
     private String high;
     private String fengxiang;
