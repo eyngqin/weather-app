@@ -9,10 +9,10 @@ Spring Boot
 RestTemplate
 
 部署方式使用了阿里云的流水线，做到了CI/CD，做到了云部署，
-拉取我在github上的代码，执行pom.xml，打包,，并部署
-代码在github上,使用deploy.sh的shell脚本部署
+拉取我在github上的代码，执行pom.xml，打包测试,并部署,
+代码在github上,使用deploy.sh的shell脚本部署,
 github: https://github.com/eyngqin/weather-app
-如果像github提交了代码，就会触发CI/CD
+如果向github提交了代码，就会触发CI/CD
 
 访问方法如下：下面是多个城市天气预报的访问
 http://47.104.90.206:8087/cityNames/{cityNames}
